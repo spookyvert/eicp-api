@@ -8,6 +8,7 @@ def convertTweet(x):
 
 f = open('badterms.csv')
 tmpArray = []
+data = []
 csv_f = csv.reader(f)
 
 app = Flask(__name__)
@@ -17,8 +18,6 @@ for row in csv_f:
 
 @app.route('/t/<username>')
 def show_user_profile(username):
-    # show the user profile for that user
-    data = []
     for word in tmpArray:
         c = twint.Config()
         c.Limit = 10
@@ -30,7 +29,7 @@ def show_user_profile(username):
         data = twint.output.tweets_list
 
     tweetsMap = list(map(convertTweet, data))
-
+    data.clear()
     return jsonify(tweetsMap)
 
    
