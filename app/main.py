@@ -31,7 +31,7 @@ def show_user_avatar(username):
     users = twint.output.users_list
     
     tweetsMap = list(map(convertData, users))
-    data.clear()
+    users.clear()
     return jsonify(tweetsMap)
 
 
